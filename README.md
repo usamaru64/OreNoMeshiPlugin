@@ -1,24 +1,7 @@
-# SpigotPluginTemplate
+# OreNoMeshi
 [![EasySpigotAPI](https://img.shields.io/badge/EasySpigotAPI-%E2%AC%85-4D4.svg)](https://github.com/sya-ri/EasySpigotAPI)
 
 [EasySpigotAPI](https://github.com/sya-ri/EasySpigotAPI) を使って簡単にプラグインを作ることができます。
-
-## TODO
-変更が必要なところがあります。
-
-パッケージ名を設定しましょう。 ドメインを逆さにするのが定石になります。もしも自分のドメインを持っていない時は GitHub のアカウントを使いましょう。
-
-### [Main.kt](src/main/kotlin/sample/Main.kt)
-
-```kotlin
-package sample // TODO 固有のパッケージ名を設定する
-```
-
-> e.g. GitHub のユーザー名が `abcdef` で、作るプラグインの名前が `Sample` だったら
->
-> ```kotlin
-> package com.github.abcdef.sample
-> ```
 
 ### [build.gradle.kts](build.gradle.kts)
 

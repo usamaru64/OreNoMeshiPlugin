@@ -9,7 +9,7 @@ plugins {
     id("net.minecrell.plugin-yml.bukkit") version "0.4.0"
 }
 
-version = "1.0.0"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
@@ -39,6 +39,7 @@ tasks.withType<ShadowJar> {
 configure<BukkitPluginDescription> {
     name = project.name
     version = project.version.toString()
-    main = "sample.Main" // TODO JavaPlugin を継承したクラスとパッケージを入力する
+    main = "com.github.usamaru64.orenomeshi.Main"
     apiVersion = "1.16"
+    author = "usamaru64"
 }
