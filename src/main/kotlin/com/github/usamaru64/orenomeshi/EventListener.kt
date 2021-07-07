@@ -13,12 +13,11 @@ object EventListener {
         plugin.events {
             event<PlayerItemConsumeEvent> {
                 val player = it.player
+                val nowhunger = player.foodLevel
                 when (it.item) {
                     MyFood.carrot -> {
-                        cancelEventIf<FoodLevelChangeEvent> {
-                            true
-                        }
-                        player.foodLevel + 1
+                        cancelEventIf<FoodLevelChangeEvent> { true }
+                        player.foodLevel = nowhunger + 1
                         player.sendMessage("&f${it.item.displayName} &fを食べた".toColor())
                         player.addPotionEffect(PotionEffect(PotionEffectType.LUCK, 120, 5))
                     }
