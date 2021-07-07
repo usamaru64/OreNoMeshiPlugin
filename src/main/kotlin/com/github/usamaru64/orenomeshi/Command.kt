@@ -10,12 +10,18 @@ object Command {
         plugin.command("orenomeshi") {
             aliases = listOf("onm", "usamarusama")
             tab {
-                argument { add("carrot") }
+                argument {
+                    addAll("carrot", "reload")
+                }
                 execute {
                     val player = sender as? Player ?: return@execute sender.sendMessage("貴様、人ではないな")
                     when (args.lowerOrNull(0)) {
                         "carrot" -> {
                             player.inventory.addItem(MyFood.carrot)
+                        }
+                        "reload" -> {
+                            ConfigLoader.load(sender)
+                            player.sendMessage("りろーどするよ")
                         }
                         else -> {
                             player.sendMessage("carrotしかありません")
