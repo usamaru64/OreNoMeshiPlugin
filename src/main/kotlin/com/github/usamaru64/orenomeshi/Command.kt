@@ -21,6 +21,7 @@ object Command {
                         }
                         "reload" -> {
                             ConfigLoader.load(sender)
+                            MyFood.carrot
                             player.sendMessage("りろーどするよ")
                         }
                         else -> {
