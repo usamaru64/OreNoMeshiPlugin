@@ -1,11 +1,14 @@
 package com.github.usamaru64.orenomeshi
 
 import com.github.syari.spigot.api.item.displayName
+import com.github.syari.spigot.api.item.itemStack
 import org.bukkit.Material
-import org.bukkit.inventory.ItemStack
 
 object MyFood {
-    val carrot = ItemStack(Material.CARROT).apply {
-        displayName = "&2にんじん"
+    var carrot = itemStack(Material.CARROT)
+    fun load() {
+        carrot = itemStack(Material.CARROT) {
+            displayName = ConfigLoader.name
+        }
     }
 }

@@ -11,20 +11,18 @@ import org.bukkit.potion.PotionEffectType
 object EventListener {
     fun register() {
         plugin.events {
+            cancelEventIf<FoodLevelChangeEvent> {
+                it.item == MyFood.carrot
+            }
             event<PlayerItemConsumeEvent> {
                 val player = it.player
                 val nowhunger = player.foodLevel
-                val food = it.item
-//                event<FoodLevelChangeEvent> {
-//                    food == MyFood.carrot
-//                }
-                when (food) {
+                val nowsaturation = player.saturation
+                when (it.item) {
                     MyFood.carrot -> {
-                        event<FoodLevelChangeEvent> {
-                            it.isCancelled
-                        }
-                        player.foodLevel = nowhunger + 1
-                        player.sendMessage("&f${food.displayName} &fを食べた".toColor())
+                        player.saturation = nowsaturation + ConfigLoader.saturation
+                        player.foodLevel = nowhunger + ConfigLoader.feed
+                        player.sendMessage("&f${it.item.displayName} &fを食べた".toColor())
                         player.addPotionEffect(PotionEffect(PotionEffectType.LUCK, 120, 5))
                     }
                 }

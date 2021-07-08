@@ -13,5 +13,7 @@ class Main : JavaPlugin() {
     override fun onEnable() {
         EventListener.register()
         Command.register()
+        ConfigLoader.load(server.consoleSender)
+        MyFood.load()
     }
 }
