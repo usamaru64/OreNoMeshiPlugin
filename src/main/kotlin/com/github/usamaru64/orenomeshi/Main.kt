@@ -10,10 +10,10 @@ class Main : JavaPlugin() {
         plugin = this
     }
 
+    @OptIn(ExperimentalStdlibApi::class)
     override fun onEnable() {
+        ConfigLoader.load(server.consoleSender)
         EventListener.register()
         Command.register()
-        ConfigLoader.load(server.consoleSender)
-        MyFood.load()
     }
 }
