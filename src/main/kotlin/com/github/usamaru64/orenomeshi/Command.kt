@@ -26,23 +26,21 @@ object Command {
                     when (args.lowerOrNull(0)) {
                         "get" -> {
                             val id = args.getOrNull(1)
-                            val name = CustomFood.getById(id)?.name
-                            player.sendMessage("入力した値は${id}でした")
-                            when (args.getOrNull(1)) {
-                                null -> {
-                                    player.sendMessage("idを入力してね")
-                                }
-                                "tomato" -> {
-                                    player.sendMessage("&4&lマイクラにトマトは無い！！！".toColor())
-                                }
-                                CustomFood.getById(id)?.id -> {
-                                    player.sendMessage("$name&fを返したよ".toColor())
-                                    player.inventory
-                                        .addItem(itemStack(Material.CARROT, "$name".toColor()))
-                                }
-                                else -> {
-                                    player.sendMessage("そんなアイテムは無い")
-                                }
+                            if (id == null) {
+                                player.sendMessage("idを入力してね")
+                                return@execute
+                            } else if (id == "tomato") {
+                                player.sendMessage("&4&lマイクラにトマトは無い！！！".toColor())
+                                return@execute
+                            }
+                            val food = CustomFood.getById(id)
+                            if (food != null) {
+                                val name = food.name
+                                player.sendMessage("$name&fを返したよ".toColor())
+                                player.inventory
+                                    .addItem(itemStack(Material.CARROT, name))
+                            } else {
+                                player.sendMessage("そんなアイテムは無い")
                             }
                         }
                         "reload" -> {

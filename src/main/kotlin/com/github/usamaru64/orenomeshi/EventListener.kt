@@ -17,19 +17,13 @@ object EventListener {
             }
             event<PlayerItemConsumeEvent> {
                 val player = it.player
-                val nowhunger = player.foodLevel
-                val nowsaturation = player.saturation
                 val name = it.item.displayName
-                player.sendMessage("味見したのは$name&fです".toColor())
-                player.sendMessage("${CustomFood.container.byName}")
-                player.sendMessage("${CustomFood.getByName(name)}&fを出しました".toColor())
-                when (name) {
-                    CustomFood.getByName(name)?.name?.toColor() -> {
-                        player.saturation = nowsaturation + CustomFood.getByName(name)?.saturation!!
-                        player.foodLevel = nowhunger + CustomFood.getByName(name)?.feed!!
-                        player.sendMessage("&f$name &fを食べた".toColor())
-                        player.addPotionEffect(PotionEffect(PotionEffectType.LUCK, 120, 5))
-                    }
+                val food = CustomFood.getByName(name)
+                if (food != null) {
+                    player.saturation += food.saturation
+                    player.foodLevel += food.feed
+                    player.sendMessage("&f$name &fを食べた".toColor())
+                    player.addPotionEffect(PotionEffect(PotionEffectType.LUCK, 120, 5))
                 }
             }
         }
