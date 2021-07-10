@@ -1,16 +1,24 @@
 package com.github.usamaru64.orenomeshi.CustomFood
 
-class CustomFood(
+data class CustomFood(
     val id: String,
     val feed: Int,
     val saturation: Int,
     val name: String
 ) {
     companion object {
+
         var customfood = mapOf<String, CustomFood>()
+            set(value) {
+                field = value
+                customfoodname = value.entries.associate { it.value.name to it.value }
+            }
 
-        fun getId(name: String?) = customfood[name]
+        var customfoodname = mapOf<String, CustomFood>()
+            private set
 
-        val ID get() = customfood.keys
+        fun getId(id: String?) = customfood[id]
+
+        fun getName(name: String?) = customfoodname[name]
     }
 }

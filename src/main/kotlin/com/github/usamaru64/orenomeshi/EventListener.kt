@@ -13,19 +13,21 @@ object EventListener {
     fun register() {
         plugin.events {
             cancelEventIf<FoodLevelChangeEvent> {
-                CustomFood.customfood.keys.contains(it.item?.displayName)
+                CustomFood.customfoodname.keys.contains(it.item?.displayName)
             }
             event<PlayerItemConsumeEvent> {
                 val player = it.player
                 val nowhunger = player.foodLevel
                 val nowsaturation = player.saturation
-                val name = it.item?.displayName
-//                player.sendMessage("${it.item?.displayName}")
+                val name = it.item.displayName
+                player.sendMessage("味見したのは$name&fです".toColor())
+                player.sendMessage("${CustomFood.customfoodname}")
+                player.sendMessage("${CustomFood.getName(name)}&fを出しました".toColor())
                 when (name) {
-                    CustomFood.getId(name)?.name -> {
-                        player.saturation = nowsaturation + CustomFood.getId(name)?.saturation!!
-                        player.foodLevel = nowhunger + CustomFood.getId(name)?.feed!!
-                        player.sendMessage("&f${it.item.displayName} &fを食べた".toColor())
+                    CustomFood.getName(name)?.name?.toColor() -> {
+                        player.saturation = nowsaturation + CustomFood.getName(name)?.saturation!!
+                        player.foodLevel = nowhunger + CustomFood.getName(name)?.feed!!
+                        player.sendMessage("&f$name &fを食べた".toColor())
                         player.addPotionEffect(PotionEffect(PotionEffectType.LUCK, 120, 5))
                     }
                 }

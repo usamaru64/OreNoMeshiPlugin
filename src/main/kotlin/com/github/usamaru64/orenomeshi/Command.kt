@@ -19,15 +19,15 @@ object Command {
                     addAll("get", "reload")
                 }
                 argument("get **") {
-                    addAll(CustomFood.ID)
+                    addAll(CustomFood.customfood.keys)
                 }
                 execute {
                     val player = sender as? Player ?: return@execute sender.sendMessage("貴様、人ではないな")
                     when (args.lowerOrNull(0)) {
                         "get" -> {
-                            val name = args.getOrNull(1)
-                            player.sendMessage("${CustomFood.getId(name)?.name}を返したよ")
-                            player.sendMessage("入力した値は${name}でした")
+                            val id = args.getOrNull(1)
+                            val name = CustomFood.getId(id)?.name
+                            player.sendMessage("入力した値は${id}でした")
                             when (args.getOrNull(1)) {
                                 null -> {
                                     player.sendMessage("idを入力してね")
@@ -35,8 +35,10 @@ object Command {
                                 "tomato" -> {
                                     player.sendMessage("&4&lマイクラにトマトは無い！！！".toColor())
                                 }
-                                CustomFood.getId(name)?.name -> {
-                                    player.inventory.addItem(itemStack(Material.CARROT, displayName = args.getOrNull(1)))
+                                CustomFood.getId(id)?.id -> {
+                                    player.sendMessage("$name&fを返したよ".toColor())
+                                    player.inventory
+                                        .addItem(itemStack(Material.CARROT, "$name".toColor()))
                                 }
                                 else -> {
                                     player.sendMessage("そんなアイテムは無い")
