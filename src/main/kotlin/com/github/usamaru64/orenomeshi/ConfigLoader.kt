@@ -10,13 +10,13 @@ import org.bukkit.command.CommandSender
 @OptIn(ExperimentalStdlibApi::class)
 object ConfigLoader {
     fun load(sender: CommandSender) {
-        CustomFood.customfood = buildMap {
+        CustomFood.container.foods = buildSet {
             plugin.configDirectory(sender, "food") {
                 val id = file.nameWithoutExtension
                 val feed = get("feed", ConfigIntDataType) ?: 1
                 val saturation = get("saturation", ConfigIntDataType) ?: 1
                 val name = get("name", ConfigDataType.String) ?: id
-                put(id, CustomFood(id, feed, saturation, name))
+                add(CustomFood(id, feed, saturation, name))
             }
         }
     }

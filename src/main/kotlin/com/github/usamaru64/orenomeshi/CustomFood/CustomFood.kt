@@ -7,18 +7,24 @@ data class CustomFood(
     val name: String
 ) {
     companion object {
+        val container = CustomFoodContainer()
 
-        var customfood = mapOf<String, CustomFood>()
-            set(value) {
-                field = value
-                customfoodname = value.entries.associate { it.value.name to it.value }
-            }
+        fun getById(id: String?) = container.byId[id]
 
-        var customfoodname = mapOf<String, CustomFood>()
-            private set
-
-        fun getId(id: String?) = customfood[id]
-
-        fun getName(name: String?) = customfoodname[name]
+        fun getByName(name: String?) = container.byName[name]
     }
+}
+class CustomFoodContainer {
+    var byId: Map<String, CustomFood> = mapOf()
+        private set
+
+    var byName: Map<String, CustomFood> = mapOf()
+        private set
+
+    var foods: Set<CustomFood>
+        get() = byId.values.toSet()
+        set(value) {
+            this.byId = value.associateBy { it.id }
+            this.byName = value.associateBy { it.name }
+        }
 }
