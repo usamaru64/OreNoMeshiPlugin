@@ -36,9 +36,10 @@ object Command {
                             val food = CustomFood.getById(id)
                             if (food != null) {
                                 val name = food.name
+                                val quantity = args.getOrNull(2)?.toIntOrNull() ?: 1
                                 player.sendMessage("$name&fを返したよ".toColor())
                                 player.inventory
-                                    .addItem(itemStack(Material.CARROT, name))
+                                    .addItem(itemStack(Material.CARROT, name) { amount = quantity })
                             } else {
                                 player.sendMessage("そんなアイテムは無い")
                             }

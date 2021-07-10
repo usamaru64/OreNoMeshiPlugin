@@ -10,7 +10,7 @@ plugins {
     id("net.minecrell.plugin-yml.bukkit") version "0.4.0"
 }
 
-version = "1.1.1"
+version = "1.1.2"
 
 repositories {
     mavenCentral()
