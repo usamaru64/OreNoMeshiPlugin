@@ -13,9 +13,9 @@ object ConfigLoader {
         CustomFood.customfood = buildMap {
             plugin.configDirectory(sender, "food") {
                 val id = file.nameWithoutExtension
-                val feed = get("feed", ConfigIntDataType, 1)
-                val saturation = get("saturation", ConfigIntDataType, 1)
-                val name = get("name", ConfigDataType.String, id)
+                val feed = get("feed", ConfigIntDataType) ?: 1
+                val saturation = get("saturation", ConfigIntDataType) ?: 1
+                val name = get("name", ConfigDataType.String) ?: id
                 put(id, CustomFood(id, feed, saturation, name))
             }
         }

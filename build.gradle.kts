@@ -1,3 +1,4 @@
+
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 import org.jlleitschuh.gradle.ktlint.KtlintExtension
@@ -24,6 +25,12 @@ dependencies {
     implementation("org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT")
     shadowImplementation("com.github.sya-ri:EasySpigotAPI:2.3.3") {
         exclude(group = "org.spigotmc", module = "spigot-api")
+    }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs = listOf("-Xopt-in=kotlin.ExperimentalStdlibApi", "-Xopt-in=kotlin.RequiresOptIn")
     }
 }
 
