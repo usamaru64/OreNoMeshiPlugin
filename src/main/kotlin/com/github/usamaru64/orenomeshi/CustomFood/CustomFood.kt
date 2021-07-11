@@ -1,10 +1,13 @@
 package com.github.usamaru64.orenomeshi.CustomFood
 
+import org.bukkit.Material
+
 data class CustomFood(
     val id: String,
     val feed: Int,
     val saturation: Int,
-    val name: String
+    val name: String,
+    val type: Material
 ) {
     companion object {
         val container = CustomFoodContainer()

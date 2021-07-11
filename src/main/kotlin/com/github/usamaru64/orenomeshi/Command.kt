@@ -6,7 +6,6 @@ import com.github.syari.spigot.api.item.itemStack
 import com.github.syari.spigot.api.string.toColor
 import com.github.usamaru64.orenomeshi.CustomFood.CustomFood
 import com.github.usamaru64.orenomeshi.Main.Companion.plugin
-import org.bukkit.Material
 import org.bukkit.entity.Player
 
 @kotlin.ExperimentalStdlibApi
@@ -36,10 +35,11 @@ object Command {
                             val food = CustomFood.getById(id)
                             if (food != null) {
                                 val name = food.name
+                                val type = food.type
                                 val quantity = args.getOrNull(2)?.toIntOrNull() ?: 1
                                 player.sendMessage("$name&fを返したよ".toColor())
                                 player.inventory
-                                    .addItem(itemStack(Material.CARROT, name) { amount = quantity })
+                                    .addItem(itemStack(type, name) { amount = quantity })
                             } else {
                                 player.sendMessage("そんなアイテムは無い")
                             }
