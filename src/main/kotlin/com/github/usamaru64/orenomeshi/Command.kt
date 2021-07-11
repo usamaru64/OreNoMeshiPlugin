@@ -3,7 +3,7 @@ package com.github.usamaru64.orenomeshi
 import com.github.syari.spigot.api.command.command
 import com.github.syari.spigot.api.command.tab.CommandTabArgument.Companion.argument
 import com.github.syari.spigot.api.item.itemStack
-import com.github.syari.spigot.api.string.toColor
+import com.github.syari.spigot.api.message.sendChatMessage
 import com.github.usamaru64.orenomeshi.CustomFood.CustomFood
 import com.github.usamaru64.orenomeshi.Main.Companion.plugin
 import org.bukkit.entity.Player
@@ -15,7 +15,7 @@ object Command {
             aliases = listOf("onm", "usamarusama")
             tab {
                 argument {
-                    addAll("get", "reload")
+                    addAll("get", "reload", "help")
                 }
                 argument("get **") {
                     addAll(CustomFood.container.byId.keys)
@@ -26,10 +26,7 @@ object Command {
                         "get" -> {
                             val id = args.getOrNull(1)
                             if (id == null) {
-                                player.sendMessage("idを入力してね")
-                                return@execute
-                            } else if (id == "tomato") {
-                                player.sendMessage("&4&lマイクラにトマトは無い！！！".toColor())
+                                player.sendChatMessage("&7[&aOreNoMeshi&7] &fアイテムのファイル名を入力してください")
                                 return@execute
                             }
                             val food = CustomFood.getById(id)
@@ -37,19 +34,25 @@ object Command {
                                 val name = food.name
                                 val type = food.type
                                 val quantity = args.getOrNull(2)?.toIntOrNull() ?: 1
-                                player.sendMessage("$name&fを返したよ".toColor())
+                                player.sendChatMessage("&7[&aOreNoMeshi&7]  &f$name&f を ${quantity}個 取得しました")
                                 player.inventory
                                     .addItem(itemStack(type, name) { amount = quantity })
                             } else {
-                                player.sendMessage("そんなアイテムは無い")
+                                player.sendChatMessage("&7[&aOreNoMeshi&7] &fアイテムが存在しません")
                             }
                         }
                         "reload" -> {
                             ConfigLoader.load(sender)
-                            player.sendMessage("りろーどするよ")
+                            player.sendChatMessage("&7[&aOreNoMeshi&7] &fリロードが完了しました")
+                        }
+                        "help" -> {
+                            player.sendChatMessage("&7[&aOreNoMeshi&7]")
+                            player.sendChatMessage("&3/onm get [file] [amount] &7: &fこのプラグインで追加されたアイテムを取得します")
+                            player.sendChatMessage("&3/onm reload &7: &fコンフィグファイルを再読み込みします")
+                            player.sendChatMessage("&3/onm help &7: &fこのヘルプを表示します")
                         }
                         else -> {
-                            player.sendMessage("carrotしかありません")
+                            player.sendChatMessage("&7[&aOreNoMeshi&7] &fコマンドがありません、/onm help でヘルプを参照してください")
                         }
                     }
                 }
