@@ -15,7 +15,7 @@ object Command {
             aliases = listOf("onm", "usamarusama")
             tab {
                 argument {
-                    addAll("get", "reload", "help")
+                    addAll("get", "reload", "help", "?")
                 }
                 argument("get **") {
                     addAll(CustomFood.container.byId.keys)
@@ -33,10 +33,11 @@ object Command {
                             if (food != null) {
                                 val name = food.name
                                 val type = food.type
+                                val lore = food.lore
                                 val quantity = args.getOrNull(2)?.toIntOrNull() ?: 1
                                 player.sendChatMessage("&7[&aOreNoMeshi&7]  &f$name&f を ${quantity}個 取得しました")
                                 player.inventory
-                                    .addItem(itemStack(type, name) { amount = quantity })
+                                    .addItem(itemStack(type, name, lore = lore) { amount = quantity })
                             } else {
                                 player.sendChatMessage("&7[&aOreNoMeshi&7] &fアイテムが存在しません")
                             }
@@ -45,14 +46,11 @@ object Command {
                             ConfigLoader.load(sender)
                             player.sendChatMessage("&7[&aOreNoMeshi&7] &fリロードが完了しました")
                         }
-                        "help" -> {
+                        else -> {
                             player.sendChatMessage("&7[&aOreNoMeshi&7]")
                             player.sendChatMessage("&3/onm get [file] [amount] &7: &fこのプラグインで追加されたアイテムを取得します")
                             player.sendChatMessage("&3/onm reload &7: &fコンフィグファイルを再読み込みします")
                             player.sendChatMessage("&3/onm help &7: &fこのヘルプを表示します")
-                        }
-                        else -> {
-                            player.sendChatMessage("&7[&aOreNoMeshi&7] &fコマンドがありません、/onm help でヘルプを参照してください")
                         }
                     }
                 }

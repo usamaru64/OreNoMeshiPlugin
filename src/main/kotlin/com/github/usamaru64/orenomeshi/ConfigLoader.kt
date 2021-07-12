@@ -15,11 +15,12 @@ object ConfigLoader {
         CustomFood.container.foods = buildSet {
             plugin.configDirectory(sender, "food") {
                 val id = file.nameWithoutExtension
-                val feed = get("feed", ConfigIntDataType) ?: 1
-                val saturation = get("saturation", ConfigIntDataType) ?: 1
+                val feed = get("feed", ConfigIntDataType) ?: 0
+                val saturation = get("saturation", ConfigIntDataType) ?: 0
                 val name = get("name", ConfigDataType.String) ?: id
                 val type = get("type", ConfigDataType.Material) ?: Material.CARROT
-                add(CustomFood(id, feed, saturation, name.toColor(), type))
+                val lore = get("lore", ConfigDataType.StringList)?.map { it.toColor() } ?: listOf()
+                add(CustomFood(id, feed, saturation, name.toColor(), type, lore))
             }
         }
     }

@@ -7,7 +7,8 @@ data class CustomFood(
     val feed: Int,
     val saturation: Int,
     val name: String,
-    val type: Material
+    val type: Material,
+    val lore: List<String>
 ) {
     companion object {
         val container = CustomFoodContainer()
