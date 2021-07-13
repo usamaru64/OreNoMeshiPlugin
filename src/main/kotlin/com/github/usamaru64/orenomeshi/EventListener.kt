@@ -19,9 +19,9 @@ object EventListener {
                 val food = CustomFood.getByName(name)
                 if (food != null) {
                     it.isCancelled = true
+                    it.item.amount += -1
                     player.saturation += food.saturation
                     player.foodLevel += food.feed
-                    player.inventory.itemInMainHand.amount += -1
                     player.playSound("entity.player.burp")
                     player.sendChatMessage("&f$name &fを食べた")
                     player.addPotionEffect(PotionEffect(PotionEffectType.LUCK, 120, 5))
