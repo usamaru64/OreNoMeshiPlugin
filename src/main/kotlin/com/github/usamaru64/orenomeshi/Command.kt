@@ -21,7 +21,7 @@ object Command {
                     addAll(CustomFood.container.byId.keys)
                 }
                 execute {
-                    val player = sender as? Player ?: return@execute sender.sendMessage("貴様、人ではないな")
+                    val player = sender as? Player ?: return@execute sender.sendChatMessage("&7[&aOreNoMeshi&7] &fコンソールからの実行はできません")
                     when (args.lowerOrNull(0)) {
                         "get" -> {
                             val id = args.getOrNull(1)
