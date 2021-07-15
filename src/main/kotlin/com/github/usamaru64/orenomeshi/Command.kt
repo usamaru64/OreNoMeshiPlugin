@@ -15,7 +15,7 @@ object Command {
             aliases = listOf("onm", "usamarusama")
             tab {
                 argument {
-                    addAll("get", "reload", "help", "?")
+                    addAll("get", "stats", "reload", "help", "?")
                 }
                 argument("get **") {
                     addAll(CustomFood.container.byId.keys)
@@ -42,6 +42,9 @@ object Command {
                                 player.sendChatMessage("&7[&aOreNoMeshi&7] &fアイテムが存在しません")
                             }
                         }
+                        "stats" -> {
+                            player.sendChatMessage("&7[&aOreNoMeshi&7] &6満腹度&7: &f${player.foodLevel} &e隠し満腹度&7: &f${player.saturation}")
+                        }
                         "reload" -> {
                             ConfigLoader.load(sender)
                             player.sendChatMessage("&7[&aOreNoMeshi&7] &fリロードが完了しました")
@@ -49,6 +52,7 @@ object Command {
                         else -> {
                             player.sendChatMessage("&7[&aOreNoMeshi&7]")
                             player.sendChatMessage("&3/onm get [file] [amount] &7: &fこのプラグインで追加されたアイテムを取得します")
+                            player.sendChatMessage("&3/onm stats &7: &f現在の満腹度と隠し満腹度を表示します")
                             player.sendChatMessage("&3/onm reload &7: &fコンフィグファイルを再読み込みします")
                             player.sendChatMessage("&3/onm help &7: &fこのヘルプを表示します")
                         }
