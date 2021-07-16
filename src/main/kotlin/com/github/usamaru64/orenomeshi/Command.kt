@@ -58,6 +58,7 @@ object Command {
                             }
                             player.foodLevel = hunger
                             player.saturation = saturation
+                            player.sendChatMessage("&7[&aOreNoMeshi&7] &6満腹度&7: &f$hunger &e隠し満腹度&7: &f$saturation")
                         }
                         "reload" -> {
                             ConfigLoader.load(sender)
