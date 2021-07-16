@@ -1,6 +1,7 @@
 package com.github.usamaru64.orenomeshi.CustomFood
 
 import org.bukkit.Material
+import org.bukkit.potion.PotionEffectType
 
 data class CustomFood(
     val id: String,
@@ -8,7 +9,8 @@ data class CustomFood(
     val saturation: Int,
     val name: String,
     val type: Material,
-    val lore: List<String>
+    val lore: List<String>,
+    val effect: List<PotionEffectType>
 ) {
     companion object {
         val container = CustomFoodContainer()

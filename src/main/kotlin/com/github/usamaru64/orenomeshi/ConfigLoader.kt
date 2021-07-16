@@ -20,7 +20,8 @@ object ConfigLoader {
                 val name = get("name", ConfigDataType.String) ?: id
                 val type = get("type", ConfigDataType.Material) ?: Material.CARROT
                 val lore = get("lore", ConfigDataType.StringList, false)?.map { it.toColor() } ?: listOf()
-                add(CustomFood(id, feed, saturation, name.toColor(), type, lore))
+                val effect = get("effect", ConfigDataType.PotionEffectTypeList, false) ?: listOf()
+                add(CustomFood(id, feed, saturation, name.toColor(), type, lore, effect))
             }
         }
     }
