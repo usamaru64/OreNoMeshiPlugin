@@ -15,7 +15,7 @@ object Command {
             aliases = listOf("onm", "usamarusama")
             tab {
                 argument {
-                    addAll("get", "stats", "reload", "help", "?")
+                    addAll("get", "stats", "set", "reload", "help", "?")
                 }
                 argument("get **") {
                     addAll(CustomFood.container.byId.keys)
@@ -45,6 +45,20 @@ object Command {
                         "stats" -> {
                             player.sendChatMessage("&7[&aOreNoMeshi&7] &6満腹度&7: &f${player.foodLevel} &e隠し満腹度&7: &f${player.saturation}")
                         }
+                        "set" -> {
+                            val hunger = args.getOrNull(1)?.toIntOrNull()
+                            if (hunger == null) {
+                                player.sendChatMessage("&7[&aOreNoMeshi&7] &f値を入力してください")
+                                return@execute
+                            }
+                            val saturation = args.getOrNull(2)?.toFloatOrNull()
+                            if (saturation == null) {
+                                player.sendChatMessage("&7[&aOreNoMeshi&7] &f値を入力してください")
+                                return@execute
+                            }
+                            player.foodLevel = hunger
+                            player.saturation = saturation
+                        }
                         "reload" -> {
                             ConfigLoader.load(sender)
                             player.sendChatMessage("&7[&aOreNoMeshi&7] &fリロードが完了しました")
@@ -53,6 +67,7 @@ object Command {
                             player.sendChatMessage("&7[&aOreNoMeshi&7]")
                             player.sendChatMessage("&3/onm get [file] [amount] &7: &fこのプラグインで追加されたアイテムを取得します")
                             player.sendChatMessage("&3/onm stats &7: &f現在の満腹度と隠し満腹度を表示します")
+                            player.sendChatMessage("&3/onm set [hunger] [saturation] &7: &f自身の満腹度と隠し満腹度の値を設定します")
                             player.sendChatMessage("&3/onm reload &7: &fコンフィグファイルを再読み込みします")
                             player.sendChatMessage("&3/onm help &7: &fこのヘルプを表示します")
                         }
