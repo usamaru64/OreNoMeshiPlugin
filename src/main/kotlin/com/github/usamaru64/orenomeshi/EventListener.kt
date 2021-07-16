@@ -25,7 +25,7 @@ object EventListener {
                         player.addPotionEffect(PotionEffect(it, 120, 5))
                     }
                     player.playSound("entity.player.burp")
-                    player.sendChatMessage("&f$name &fを食べた")
+                    player.sendChatMessage("&7[&aOreNoMeshi&7] &f$name &fを食べた")
 //                    player.addPotionEffect(PotionEffect(PotionEffectType.LUCK, 120, 5))
                 }
             }
