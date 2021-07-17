@@ -17,8 +17,9 @@ object EventListener {
                 val name = it.item.displayName
                 val food = CustomFood.getByName(name)
                 if (food != null) {
-                    it.isCancelled = true
-                    it.setItem(it.item.apply { amount -- })
+                    player.inventory.itemInMainHand.amount --
+//                    it.isCancelled = true
+//                    it.setItem(it.item.apply { amount -- })
                     player.saturation += food.saturation
                     player.foodLevel += food.feed
                     food.effect.forEach {
